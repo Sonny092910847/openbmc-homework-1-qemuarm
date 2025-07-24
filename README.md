@@ -13,8 +13,8 @@
 
 ## 1. 關鍵 local.conf 自訂設定
 
-```
-在 build/qemuarm/conf/local.conf 中加入以下設定，以啟用開發功能和必要的服務。
+```bash
+# 在 build/qemuarm/conf/local.conf 中加入以下設定，以啟用開發功能和必要的服務。
 # --- 作業最終自訂設定 ---
 # 強制啟用開發功能，允許空密碼和自動序列登入
 EXTRA_IMAGE_FEATURES += " empty-root-password allow-empty-password serial-autologin-root"
@@ -28,8 +28,8 @@ IMAGE_INSTALL:remove = " obmc-phosphor-static-password"
 
 ## 2. QEMU 啟動指令
 
-```
-在成功執行 bitbake obmc-phosphor-image 編譯後，使用以下指令啟動 QEMU，並增加記憶體和正確的網路埠轉發設定。
+```bash
+# 在成功執行 bitbake obmc-phosphor-image 編譯後，使用以下指令啟動 QEMU，並增加記憶體和正確的網路埠轉發設定。
 /home/sonny/openbmc/build/qemuarm/tmp/work/x86_64-linux/qemu-helper-native/1.0/recipe-sysroot-native/usr/bin/qemu-system-arm \
 -M virt \
 -m 1024 \
@@ -43,8 +43,8 @@ IMAGE_INSTALL:remove = " obmc-phosphor-static-password"
 
 ## 3. IPMI 驗證指令
 
-```
-在 QEMU 執行時，使用以下 ipmitool 指令成功查詢 sensor 列表，證明 IPMI over LAN 連線已建立。
+```bash
+# 在 QEMU 執行時，使用以下 ipmitool 指令成功查詢 sensor 列表，證明 IPMI over LAN 連線已建立。
 bashipmitool -I lanplus -H localhost -p 6230 -U root -P 0penBmc -C 17 sdr elist
-這確認了作業一的成功完成。
+# 這確認了作業一的成功完成。
 ```
